@@ -4,7 +4,7 @@ var vitL = 1200;
 
 
 const data = {
-  londres: { arp: "Londres", dist: "5000", horairePD:"-9:02", horairePA: "56:12" },
+  londres: { arp: "Londres", dist: "5000", horairePD:"-9:02", horairePA: "56:12"},
   bruxelles: { arp: "Charleroi", dist: "3000" , horairePD:"15:03", horairePA: "-56:12"},
   madrid: { arp: "Madrid", dist: "5000", horairePD:"12:55", horairePA: "24:01" },
 };
@@ -18,14 +18,15 @@ function vols(event){
       horairePD: rap.horairePD,
       horairePA: rap.horairePA,
       paris: document.getElementById("paris").value,
+      places: rap.places,
     };
     var client= {
         prenom : document.getElementById("prenom").value,
         nom:document.getElementById("nom").value,
     }
     var classe= document.getElementById("classe").value;
-    calculer(vol, classe, client);
     event.preventDefault();
+    calculer(vol, classe, client);
 }
 
 function calculer(vol, classe, client){
