@@ -39,7 +39,8 @@ function calculer(vol, classe, client){
     } else if (vol.dist > 10000){
         var tmps= vol.dist / vitL;       
     }
-    var prix= (10/100)*vol.dist+(10/100)*vol.dist+(x/100)*vol.dist+20;
+    var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
+    var prix= prix1 + (x/100)*vol.dist;
     var fin={
         Pclient:client.prenom,
         Nclient:client.nom,
