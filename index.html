@@ -7,8 +7,50 @@
         <div class="un">
             <h1>Bienvenue sur le site officiel des compagnies aériennes Flygana</h1>
         </div>
+        
+        <div class="un">
+            <form>
+            <label>Entrez votre prénom
+                <input id="prenom" type="text">
+            </label> <br><br>
+            <label>Entrez votre nom
+                <input id="nom" type="text">
+            </label> <br><br>
+            <label>Paris est votre:</label>
+            <select id="paris">
+                <option value="dep">Départ</option>
+                <option value="arr">Arrivée</option>
+            </select> <br><br>
+
+            <label>Votre autre aéroport est:</label>
+            <select id="dest">
+                <option value="londres">Londres</option>
+                <option value="bruxelles">Bruxelles</option>
+                <option value="madrid">Madrid</option>
+            </select> <br><br>
+            <label>Votre classe est:</label>
+            <select id="classe">
+                <option value="première">Première</option>
+                <option value="deuxième">Deuxième</option>
+            </select> <br><br>
+            <button type="button" onclick="vols(event)">Valider la réservation</button>
+        </form>
+        </div>
 
 
+        <div class="un">
+            <h1>Votre billet:</h1>
+            <h3>Nom : <span id="Bnom"></span></h3>
+            <h3>Prénom : <span id="Bprenom"></span></h3>
+            <h3>Départ : <span id="Bdep"></span></h3>
+            <h3>Arrivée : <span id="Barr"></span></h3>
+            <h3>Horaire de départ : <span id="Bhoraire"></span></h3>
+            <h3>Prix : <span id="Bprix"></span></h3>
+            <h3>Classe : <span id="Bclasse"></span></h3>
+            <p>Ce billet, seulement accesible avant rafraîchissement de cette page, est à enregister 
+                au moyen d'une digne capture d'écran le plus rapidement possible</p>
+        </div>
+        
 
         <script src="script.js"></script>
     </body>
