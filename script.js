@@ -4,20 +4,19 @@ var vitL = 1200;
 
 
 const data = {
-  londres: { arp: "Londres", dist: "5000", horairePD:"-9:02", horairePA: "56:12" },
-  bruxelles: { arp: "Charleroi", dist: "3000" , horairePD:"15:03", horairePA: "-56:12"},
-  madrid: { arp: "Madrid", dist: "5000", horairePD:"12:55", horairePA: "24:01" },
+  londres: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02"},
+  bruxelles: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02"},
+  madrid: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02" },
 };
 
 
 function vols(event){
-    const rap = data[document.getElementById("dest").value];
+    const rap = data[document.getElementById("vol").value];
     var vol = {
-      arp: rap.arp,
+      départ: rap.départ,
+      arrivée: rap.arrivée,
       dist: rap.dist,
-      horairePD: rap.horairePD,
-      horairePA: rap.horairePA,
-      paris: document.getElementById("paris").value,
+      horaire: rap.horaire,
     };
     var client= {
         prenom : document.getElementById("prenom").value,
@@ -41,32 +40,25 @@ function calculer(vol, classe, client){
     }
     var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
     var prix= prix1 + (x/100)*vol.dist;
-    var fin={
+    var billet={
         Pclient:client.prenom,
         Nclient:client.nom,
-        arp: vol.arp,
-        paris:vol.paris,
-        horairePD:vol.horairePD,
-        horairePA:vol.horairePA,
+        départ: vol.départ,
+        arrivée: vol.arrivée,
+        horaire:vol.horaire,
         prix:prix,
         tmps:tmps,
         classe:classe,
     }
-    afficherBillet(fin);
+    afficherBillet(billet);
 }
 
-function afficherBillet(fin){
-    if (fin.paris === "dep"){
-        document.getElementById("Bdep").innerHTML = "Paris ORY";
-        document.getElementById("Barr").innerHTML = fin.arp;
-        document.getElementById("Bhoraire").innerHTML = fin.horairePD;
-    } else if (fin.paris === "arr"){
-        document.getElementById("Bdep").innerHTML = fin.arp;
-        document.getElementById("Barr").innerHTML = "Paris ORY";
-        document.getElementById("Bhoraire").innerHTML = fin.horairePA;
-    }
-    document.getElementById("Bnom").innerHTML = fin.Nclient;
-    document.getElementById("Bprenom").innerHTML = fin.Pclient;
-    document.getElementById("Bprix").innerHTML = fin.prix + "€";
-    document.getElementById("Bclasse").innerHTML = fin.classe;
+function afficherBillet(billet){
+    document.getElementById("Bnom").innerHTML = billet.Nclient;
+    document.getElementById("Bprenom").innerHTML = billet.Pclient;
+    document.getElementById("Bdepart").innerHTML = billet.départ;
+    document.getElementById("Barrivee").innerHTML = billet.arrivée;
+    document.getElementById("Bhoraire").innerHTML = billet.horaire;
+    document.getElementById("Bprix").innerHTML = billet.prix + "€";
+    document.getElementById("Bclasse").innerHTML = billet.classe;
 }
