@@ -4,14 +4,17 @@ var vitL = 1200;
 
 
 const data = {
-  londres: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02"},
-  bruxelles: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02"},
-  madrid: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02" },
+  londres: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
+  bruxelles: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
+  madrid: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
 };
 
 
 function vols(event){
     const rap = data[document.getElementById("vol").value];
+    //var place=1,
+    //requetePost(place)
+    //if (requeteGet(place) > rap.places){ return }
     var vol = {
       départ: rap.départ,
       arrivée: rap.arrivée,
