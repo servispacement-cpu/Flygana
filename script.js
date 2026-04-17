@@ -4,9 +4,9 @@ var vitL = 1200;
 
 
 const data = {
-  londres: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
-  bruxelles: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
-  madrid: { départ: "Londres", arrivée: "Paris", dist: "5000", horaire:"-9:02", places: 48},
+  londres: { départ: "Londres", arrivée: "Paris", dist: "340", horaire:"9:02", places: 48},
+  bruxelles: { départ: "Bruxelles", arrivée: "Paris", dist: "270", horaire:"9:02", places: 48},
+  madrid: { départ: "Madrid", arrivée: "Paris", dist: "1050", horaire:"9:02", places: 48},
 };
 
 
