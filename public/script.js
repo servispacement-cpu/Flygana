@@ -47,13 +47,13 @@ function calculer(vol, classe, client){
     } else if (classe === "deuxième"){
         var x = 5;
     }
+    var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
+    var prix= prix1 + (x/100)*prix1;
     if (vol.dist < 10000){
         var tmps= vol.dist / 900;
     } else if (vol.dist > 10000){
         var tmps= vol.dist / 1200;       
     }
-    var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
-    var prix= prix1 + (x/100)*vol.dist;
     post(client, vol, prix, tmps, classe);
 }
 
