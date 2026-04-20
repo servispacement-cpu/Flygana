@@ -7,9 +7,35 @@
     <body>
         <div class="un">
             <h1>Créer un nouveau vol</h1>
+            <form>
+            <label>Entrez l'aéroport de départ: <input type="text" id="Adep"> </label> <br><br>
+            <label>Entrez l'aéroport d'arrivée: <input type="text" id="Aarr"> </label>  <br><br>
+            <label>Entrez la distance du vol: <input type="text" id="dist"> </label>  <br><br>
+            <label>Entrez l'heure de départ du vol: <input type="text" id="horaire"> </label>  <br><br>
+            <label>Entrez le nombre de places du vol: <input type="text" id="places"> </label>  <br><br>
+            <label>Entrez le numéro du vol (IMPORTANT): <input type="text" id="Nvol"> </label>  <br><br>
+            <button onclick="createVol(event)">Créer un vol</button>
+            </form>
         </div>
+
+
+
+        <div class="un" id="cont"> 
+        </div>
+        
+
+    
         <div class="un">
-            <h1>Nouveaux clients pour les vols:</h1>
+            
+            <label>Sélectionner le numéro de vol à supprimer (s'il y a plusieurs fois le même numéro de vol, veuillez sélectionner l'un d'eux. Cela les upprimera tous.) :</label> <br><br>
+            <select id="delBilSet">
+            </select>  <br><br>
+            <button id="supbil">Supprimer les billets (après le vol)</button>
+            
         </div>
+
+
+
+        <script src="script.js"></script>
     </body>
 </html>

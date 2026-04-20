@@ -18,8 +18,7 @@ app.use(express.json());
 
 // Connect to the MongoDB database
 
-mongoose.connect('mongodb://servispacement_db_user:sett@ac-wrbrxfi-shard-00-00.r3itdqv.mongodb.net:27017,ac-wrbrxfi-shard-00-01.r3itdqv.mongodb.net:27017,ac-wrbrxfi-shard-00-02.r3itdqv.mongodb.net:27017/?ssl=true&replicaSet=atlas-10s15u-shard-0&authSource=admin&appName=Cluster0', {
-
+mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r3itdqv.mongodb.net:27017,ac-wrbrxfi-shard-00-01.r3itdqv.mongodb.net:27017,ac-wrbrxfi-shard-00-02.r3itdqv.mongodb.net:27017/Flygana?ssl=true&replicaSet=atlas-10s15u-shard-0&authSource=admin&appName=Cluster0', {
 });
 
  
@@ -27,9 +26,15 @@ mongoose.connect('mongodb://servispacement_db_user:sett@ac-wrbrxfi-shard-00-00.r
 // Define a schema for our data
 
 const itemSchema = new mongoose.Schema({
-  //restaurant: String,
-  nom: String,
-  age: Number,
+  Pclient: String,
+  Nclient:String,
+  depart: String,
+  arrivee: String,
+  horaire: String,
+  prix: Number,
+  tmps: Number,
+  classe: String,
+  Nvol: String,
 });
 
  
@@ -45,33 +50,37 @@ app.use(cors());
 
 
 
-app.get('/items', async (req, res) => {
-  const items = await Item.find();
-  res.json(items);
-});
-
-app.get('/item', async (req, res) => {
-  if (!req.query || !req.query.id) {
-    return res.status(400).json({ error: 'ID manquant' });
-  }
-  const item = await Item.findById(req.query.id);
-  res.json(item);
-});
-
-app.post('/items', async (req, res) => {
-  const item = await Item.findById(req.body.id);
-  await item.updateOne({
-   "nom": req.body.nom,
-   "age": req.body.age,
-  });
-  res.json(item);
-});
-
-app.post('/restaurant', async (req, res) => {
-  const item = new Item(req.body);
+/////////////////////////////////////////////////////////////  Post/récup les billets quands réservés
+app.post('/billet', async (req, res) => {
+  try {
+ const item = new Item(req.body);
   await item.save();
   res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
+
+app.get('/billets', async (req, res) => {
+  const items = await Item.find();  
+  res.json(items);
+});
+//////////////////////////////////////////////////////////////////////// Supprimer une fois le vol terminé
+
+
+app.delete('/delBil/:Nvol', async (req, res) => {
+  const item = req.params.Nvol;
+  await Item.deleteMany({Nvol: item});
+  res.json({ deleted: item });
+});
+
+///////////////////////////////////////////////////////////////// Créer un nouveau vol
+
+
+
+
+
 
 
 app.use(express.static("public"));
