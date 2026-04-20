@@ -1,6 +1,6 @@
 
 async function getBillet(){
-        const url = 'https://flygana.netlify.app/billets';
+        const url = 'https://flygana.onrender.com/billets';
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -64,7 +64,7 @@ document.getElementById("supbil").addEventListener("click" , delBil );
 
 async function delBil(){
     const Nvol = document.getElementById("delBilSet").value;
-    const url = `https://flygana.netlify.app/delBil/${encodeURIComponent(Nvol)}`;
+    const url = `https://flygana.onrender.com/delBil/${encodeURIComponent(Nvol)}`;
     try {
         const response = await fetch(url, {
             method: 'DELETE',

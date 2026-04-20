@@ -75,7 +75,7 @@ function calculer(vol, classe, client){
         classe,
         Nvol: vol.Nvol
     }
-    const url = 'https://flygana.netlify.app/billet';
+    const url = 'https://flygana.onrender.com/billet';
     try {
         const response = await fetch(url, {
             method: 'POST',
