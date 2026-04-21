@@ -35,6 +35,8 @@ const itemSchema = new mongoose.Schema({
   tmps: Number,
   classe: String,
   Nvol: String,
+  places: Number,
+  Vol: Boolean,
 });
 
  
@@ -75,10 +77,23 @@ app.delete('/delBil/:Nvol', async (req, res) => {
   res.json({ deleted: item });
 });
 
-///////////////////////////////////////////////////////////////// Créer un nouveau vol
+///////////////////////////////////////////////////////////////// Post/get un nouveau vol
 
+app.post('/vol', async (req, res) => {
+  try {
+ const item = new Item(req.body);
+  await item.save();
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
-
+app.get('/vol/', async (req, res) => {
+  const items = await Item.find({Vol : true});  
+  res.json(items);
+});
 
 
 

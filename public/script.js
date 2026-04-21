@@ -1,10 +1,23 @@
 
 async function getData(){
+const url = 'https://flygana.onrender.com/vol/)';
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        alert(data.depart);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
 }
 
 
-
+getData();
 
 
 
@@ -73,7 +86,8 @@ function calculer(vol, classe, client){
         prix,
         tmps,
         classe,
-        Nvol: vol.Nvol
+        Nvol: vol.Nvol,
+        Vol: false, 
     }
     const url = 'https://flygana.onrender.com/billet';
     try {
