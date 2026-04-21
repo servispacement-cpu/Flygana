@@ -37,6 +37,7 @@ const itemSchema = new mongoose.Schema({
   Nvol: String,
   places: Number,
   Vol: Boolean,
+  dist: Number,
 });
 
  

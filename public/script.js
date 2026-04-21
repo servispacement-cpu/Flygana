@@ -1,9 +1,5 @@
 
-let datavols = {
-  londres: { départ: "Londres", arrivée: "Paris", dist: "340", horaire:"9:02", places: 48, Nvol:"LP"},
-  bruxelles: { départ: "Bruxelles", arrivée: "Paris", dist: "270", horaire:"9:02", places: 48, Nvol:"BP"},
-  madrid: { départ: "Madrid", arrivée: "Paris", dist: "1050", horaire:"9:02", places: 48, Nvol:"MP"},
-};
+let datavols=[];
 
 
 /////////////////////////////////////////////////////////// RECUP/AFFICHER VOLS
@@ -31,10 +27,19 @@ getData();
 
 function afficherVol(data){
     for (let i = 0; i < data.length; i++){
+    const vol = {
+    depart: data[i].depart,
+    arrivee: data[i].arrivee,
+    horaire: data[i].horaire,
+    dist: data[i].dist,
+    places: data[i].places,
+    Nvol: data[i].Nvol,
+    }
+    datavols.push(vol);
     const opt = document.createElement("option");
-    opt.textContent = data[i].depart + "/" + data[i].arrivee;
+    opt.textContent = vol.depart + "/" + vol.arrivee;
+    opt.value = vol.Nvol;
     document.getElementById("vol").appendChild(opt);
-    datavols = data[i];
     }
 }
 
@@ -44,13 +49,14 @@ function afficherVol(data){
 
 
 function vols(event){
-    const rap = datavols[document.getElementById("vol").value];
+    const rap = datavols.find(v => v.Nvol == document.getElementById("vol").value);
     var vol = {
-      départ: rap.départ,
-      arrivée: rap.arrivée,
+      départ: rap.depart,
+      arrivée: rap.arrivee,
       dist: rap.dist,
       horaire: rap.horaire,
       Nvol: rap.Nvol,
+      places: rap.places,
     };
     var client= {
         prenom : document.getElementById("prenom").value,
@@ -74,12 +80,26 @@ function calculer(vol, classe, client){
     }
     var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
     var prix= prix1 + (x/100)*prix1;
+    alert(vol.dist);
     if (vol.dist < 10000){
         var tmps= vol.dist / 900;
     } else if (vol.dist > 10000){
         var tmps= vol.dist / 1200;       
     }
-    post(client, vol, prix, tmps, classe);
+    //post(client, vol, prix, tmps, classe);
+        const billet ={
+        Pclient:client.prenom,
+        Nclient:client.nom,
+        depart: vol.départ,
+        arrivee: vol.arrivée,
+        horaire: vol.horaire,
+        prix,
+        tmps,
+        classe,
+        Nvol: vol.Nvol,
+        Vol: false, 
+    }
+    afficherBillet(billet);
 }
 
 
@@ -87,7 +107,7 @@ function calculer(vol, classe, client){
 
 //envoi du billet DB
 
-
+/*
  async function post(client, vol, prix, tmps, classe){
     const billet ={
         Pclient:client.prenom,
@@ -119,7 +139,7 @@ function calculer(vol, classe, client){
     }
 }
 
-
+*/
 
 
 //affichage du billet pour voyageur
