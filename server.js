@@ -90,7 +90,7 @@ app.post('/vol', async (req, res) => {
   }
 });
 
-app.get('/vol/', async (req, res) => {
+app.get('/vol', async (req, res) => {
   const items = await Item.find({Vol : true});  
   res.json(items);
 });
