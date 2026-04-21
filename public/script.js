@@ -1,6 +1,15 @@
 
+let datavols = {
+  londres: { départ: "Londres", arrivée: "Paris", dist: "340", horaire:"9:02", places: 48, Nvol:"LP"},
+  bruxelles: { départ: "Bruxelles", arrivée: "Paris", dist: "270", horaire:"9:02", places: 48, Nvol:"BP"},
+  madrid: { départ: "Madrid", arrivée: "Paris", dist: "1050", horaire:"9:02", places: 48, Nvol:"MP"},
+};
+
+
+/////////////////////////////////////////////////////////// RECUP/AFFICHER VOLS
+
 async function getData(){
-const url = 'https://flygana.onrender.com/vol/)';
+const url = 'https://flygana.onrender.com/vol';
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -9,30 +18,33 @@ const url = 'https://flygana.onrender.com/vol/)';
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        alert(data.depart);
+        console.log(data);
+        afficherVol(data);
     } catch (error) {
         console.error('Erreur :', error);
         throw error;
     } 
 }
-
-
 getData();
 
 
 
-const data = {
-  londres: { départ: "Londres", arrivée: "Paris", dist: "340", horaire:"9:02", places: 48, Nvol:"LP"},
-  bruxelles: { départ: "Bruxelles", arrivée: "Paris", dist: "270", horaire:"9:02", places: 48, Nvol:"BP"},
-  madrid: { départ: "Madrid", arrivée: "Paris", dist: "1050", horaire:"9:02", places: 48, Nvol:"MP"},
-};
+function afficherVol(data){
+    for (let i = 0; i < data.length; i++){
+    const opt = document.createElement("option");
+    opt.textContent = data[i].depart + "/" + data[i].arrivee;
+    document.getElementById("vol").appendChild(opt);
+    datavols = data[i];
+    }
+}
 
 
 
+////////////////////////////////////////////////////////////////////création du billet
 
 
 function vols(event){
-    const rap = data[document.getElementById("vol").value];
+    const rap = datavols[document.getElementById("vol").value];
     var vol = {
       départ: rap.départ,
       arrivée: rap.arrivée,
@@ -52,7 +64,7 @@ function vols(event){
 
 
 
-
+//Calcul des données supplémentaire (prix, temps)
 
 function calculer(vol, classe, client){
     if (classe === "première") {
@@ -73,7 +85,7 @@ function calculer(vol, classe, client){
 
 
 
-
+//envoi du billet DB
 
 
  async function post(client, vol, prix, tmps, classe){
@@ -110,7 +122,7 @@ function calculer(vol, classe, client){
 
 
 
-
+//affichage du billet pour voyageur
 
 
 function afficherBillet(billet){
