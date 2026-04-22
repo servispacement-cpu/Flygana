@@ -1,6 +1,6 @@
 
 let datavols=[];
-
+alert("ATTENTION: ce site consiste en un amusement pour collégiens. Evitez d'entrer vos vraies données personnelles. Ce site n'utilise pas de cookies");
 
 /////////////////////////////////////////////////////////// RECUP/AFFICHER VOLS
 
