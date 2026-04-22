@@ -66,7 +66,7 @@ app.post('/billet', async (req, res) => {
 });
 
 app.get('/billets', async (req, res) => {
-  const items = await Item.find();  
+  const items = await Item.find({Vol : false});  
   res.json(items);
 });
 //////////////////////////////////////////////////////////////////////// Supprimer une fois le vol terminé

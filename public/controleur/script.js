@@ -24,8 +24,8 @@ async function afficherBillet(){
     try{
         const data = await getBillet();
         console.log(data);
-        const fil = data.filter(obj => obj.Vol !== true);
-        for (let i = 0; i < fil.length; i++){
+        for (let i = 0; i < data.length; i++){
+        const div = document.createElement("div");
         const h3p = document.createElement("h3");
         const h3n = document.createElement("h3");
         const h3d = document.createElement("h3");
@@ -35,22 +35,25 @@ async function afficherBillet(){
         const h3nv = document.createElement("h3");
         const hr = document.createElement("hr");
         const opt = document.createElement("option");
-        h3p.textContent = "Prenom du client: " + fil[i].Pclient;
-        h3n.textContent = "Nom du client: " + fil[i].Nclient;
-        h3d.textContent = "Aeroport de depart du client: " + fil[i].depart;
-        h3a.textContent = "Aeroport d'arivee du client: " + fil[i].arrivee;
-        h3h.textContent = "Horaire du vol du client: "+fil[i].horaire;
-        h3c.textContent = "Classe de vol du client: " +fil[i].classe;
-        h3nv.textContent = "Numéro de vol: " +fil[i].Nvol;
-        opt.textContent = fil[i].Nvol;
-        document.getElementById("cont").appendChild(h3p);
-        document.getElementById("cont").appendChild(h3n);
-        document.getElementById("cont").appendChild(h3d);
-        document.getElementById("cont").appendChild(h3a);
-        document.getElementById("cont").appendChild(h3h);
-        document.getElementById("cont").appendChild(h3c);
-        document.getElementById("cont").appendChild(h3nv);
-        document.getElementById("cont").appendChild(hr);
+        div.classList.add = "un";
+        div.id = "contb";
+        h3p.textContent = "Prenom du client: " + data[i].Pclient;
+        h3n.textContent = "Nom du client: " + data[i].Nclient;
+        h3d.textContent = "Aeroport de depart du client: " + data[i].depart;
+        h3a.textContent = "Aeroport d'arivee du client: " + data[i].arrivee;
+        h3h.textContent = "Horaire du vol du client: "+data[i].horaire;
+        h3c.textContent = "Classe de vol du client: " +data[i].classe;
+        h3nv.textContent = "Numéro de vol: " +data[i].Nvol;
+        opt.textContent = data[i].Nvol;
+        document.getElementById("cont").appendChild(div);
+        div.appendChild(h3p);
+        div.appendChild(h3n);
+        div.appendChild(h3d);
+        div.appendChild(h3a);
+        div.appendChild(h3h);
+        div.appendChild(h3c);
+        div.appendChild(h3nv);
+        div.appendChild(hr);
         document.getElementById("delBilSet").appendChild(opt);
     }
     } catch(err){
