@@ -24,7 +24,7 @@ async function afficherBillet(){
     try{
         const data = await getBillet();
         console.log(data);
-        const fil = data.filter(obj => obj.vol !== true);
+        const fil = data.filter(obj => obj.Vol !== true);
         for (let i = 0; i < fil.length; i++){
         const h3p = document.createElement("h3");
         const h3n = document.createElement("h3");

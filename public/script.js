@@ -80,26 +80,12 @@ function calculer(vol, classe, client){
     }
     var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
     var prix= prix1 + (x/100)*prix1;
-    alert(vol.dist);
     if (vol.dist < 10000){
         var tmps= vol.dist / 900;
     } else if (vol.dist > 10000){
         var tmps= vol.dist / 1200;       
     }
-    //post(client, vol, prix, tmps, classe);
-        const billet ={
-        Pclient:client.prenom,
-        Nclient:client.nom,
-        depart: vol.départ,
-        arrivee: vol.arrivée,
-        horaire: vol.horaire,
-        prix,
-        tmps,
-        classe,
-        Nvol: vol.Nvol,
-        Vol: false, 
-    }
-    afficherBillet(billet);
+    post(client, vol, prix, tmps, classe);
 }
 
 
@@ -107,7 +93,7 @@ function calculer(vol, classe, client){
 
 //envoi du billet DB
 
-/*
+
  async function post(client, vol, prix, tmps, classe){
     const billet ={
         Pclient:client.prenom,
@@ -139,7 +125,7 @@ function calculer(vol, classe, client){
     }
 }
 
-*/
+
 
 
 //affichage du billet pour voyageur
@@ -151,6 +137,7 @@ function afficherBillet(billet){
     document.getElementById("Bdepart").innerHTML = billet.depart;
     document.getElementById("Barrivee").innerHTML = billet.arrivee;
     document.getElementById("Bhoraire").innerHTML = billet.horaire;
+    document.getElementById("Btmps").innerHTML = billet.tmps + "heures";
     document.getElementById("Bprix").innerHTML = billet.prix + "€";
     document.getElementById("Bclasse").innerHTML = billet.classe;
     document.getElementById("BNvol").innerHTML = billet.Nvol;
