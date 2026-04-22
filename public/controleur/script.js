@@ -24,8 +24,11 @@ async function afficherBillet(){
     try{
         const data = await getBillet();
         console.log(data);
+        //créer x divs en fct du nombre de Nvol diff.
+        //const x = new Set(data.map(item => item.Nvol)).size;   
+        //Regrouper chaque billet dans la div qui corespond à son Nvol
         for (let i = 0; i < data.length; i++){
-        const div = document.createElement("div");
+        const div = document.getElementById("cont");
         const h3p = document.createElement("h3");
         const h3n = document.createElement("h3");
         const h3d = document.createElement("h3");
@@ -35,8 +38,6 @@ async function afficherBillet(){
         const h3nv = document.createElement("h3");
         const hr = document.createElement("hr");
         const opt = document.createElement("option");
-        div.classList.add = "un";
-        div.id = "contb";
         h3p.textContent = "Prenom du client: " + data[i].Pclient;
         h3n.textContent = "Nom du client: " + data[i].Nclient;
         h3d.textContent = "Aeroport de depart du client: " + data[i].depart;
@@ -45,7 +46,6 @@ async function afficherBillet(){
         h3c.textContent = "Classe de vol du client: " +data[i].classe;
         h3nv.textContent = "Numéro de vol: " +data[i].Nvol;
         opt.textContent = data[i].Nvol;
-        document.getElementById("cont").appendChild(div);
         div.appendChild(h3p);
         div.appendChild(h3n);
         div.appendChild(h3d);
@@ -63,6 +63,8 @@ async function afficherBillet(){
 
 afficherBillet();
 
+
+//////////////////////////////////////////////////////////////////////////////////
 document.getElementById("supbil").addEventListener("click" , delBil );
 
 async function delBil(){
@@ -82,6 +84,7 @@ async function delBil(){
     } 
     } 
 
+///////////////////////////////////////////////////////////////////////////////
 
 async function createVol(event){
     const vol = {
