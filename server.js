@@ -101,7 +101,8 @@ app.get('/vol', async (req, res) => {
 
 app.post('/place/:Nvol', async (req, res) => {
   try {
- const item = await Item.findOne({Vol: true, Nvol: req.params.Nvol});
+  const Nvol = decodeURIComponent(req.params.Nvol);
+ const item = await Item.findOne({Vol: true, Nvol: Nvol});
   await item.updateOne({
     $inc: { vplaces: 1 }
   });

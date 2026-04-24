@@ -74,7 +74,7 @@ function volssuite(vol){
 //Compteur de places
 
 async function addplaces(vol){
-    const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
+    const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`;
     try {
         const response = await fetch(url, {
             method: 'POST',
