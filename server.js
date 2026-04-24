@@ -116,7 +116,8 @@ app.post('/place/:Nvol', async (req, res) => {
 });
 
 app.get('/place/:Nvol', async (req, res) => {
-  const item = await Item.find({Vol : true, Nvol: req.params.Nvol});  
+  const Nvol = decodeURIComponent(req.params.Nvol);
+  const item = await Item.find({Vol : true, Nvol: Nvol});  
   res.json(item);
 });
 

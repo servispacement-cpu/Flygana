@@ -91,7 +91,7 @@ async function addplaces(vol){
 }
 
 async function resplaces(vol){
-const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
+const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`;
     try {
         const response = await fetch(url, {
             method: 'GET',
