@@ -97,21 +97,11 @@ app.get('/vol', async (req, res) => {
   res.json(items);
 });
 ////////////////////////////////////////////////////////Places
-app.post('/places', async (req, res) => {
-  try {
- const item = new Item(req.body);
-  await item.save();
-  res.json(item);
-  } catch (error){
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
 
 
 app.post('/place/:Nvol', async (req, res) => {
   try {
- const item = await Item.findOne({Vol: null, Nvol: req.params.Nvol});
+ const item = await Item.findOne({Vol: true, Nvol: req.params.Nvol});
   await item.updateOne({
     $inc: { vplaces: 1 }
   });
@@ -126,7 +116,7 @@ app.post('/place/:Nvol', async (req, res) => {
 });
 
 app.get('/place/:Nvol', async (req, res) => {
-  const item = await Item.find({Vol : null, Nvol: req.params.Nvol});  
+  const item = await Item.find({Vol : true, Nvol: req.params.Nvol});  
   res.json(item);
 });
 

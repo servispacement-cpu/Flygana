@@ -93,6 +93,7 @@ async function createVol(event){
         dist:  document.getElementById("dist").value,
         horaire:  document.getElementById("horaire").value,
         places:  document.getElementById("places").value,
+        vplaces: 0,
         Nvol:  document.getElementById("Nvol").value,
         Vol: true,
     };
@@ -117,24 +118,7 @@ async function createVol(event){
     } catch (error) {
         console.error('Erreur :', error);
     } 
-    ///////////////// places
-     const url2 = 'https://flygana.onrender.com/places';
-    try {
-        const response = await fetch(url2, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({places : vol.places, vplaces: 0 , Nvol: vol.Nvol}),
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-
-        const data = await response.json();
-        console.log('Réponse du serveur :', data);
-    } catch (error) {
-        console.error('Erreur :', error);
-    } 
 }
-
 
 
 
