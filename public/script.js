@@ -82,7 +82,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("Nombre de billet pris pour" + vol.Nvol+ " : " + data);
+        console.log("Nombre de billet pris pour " + vol.Nvol+ " : " + data);
         if (data < vol.places){
             volssuite(vol);
         } else {
