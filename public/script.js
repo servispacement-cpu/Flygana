@@ -164,7 +164,7 @@ async function calculplaces(vol){
     }
 }
 
-async function resplaces(){
+async function resplaces(vol){
 const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
     try {
         const response = await fetch(url, {
