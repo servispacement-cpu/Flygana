@@ -117,6 +117,22 @@ async function createVol(event){
     } catch (error) {
         console.error('Erreur :', error);
     } 
+    ///////////////// places
+     const url2 = 'https://flygana.onrender.com/places';
+    try {
+        const response = await fetch(url2, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: Number(JSON.stringify(vol.places)),
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+
+        const data = await response.json();
+        console.log('Réponse du serveur :', data);
+    } catch (error) {
+        console.error('Erreur :', error);
+    } 
 }
 
 

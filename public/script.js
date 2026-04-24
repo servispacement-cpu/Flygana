@@ -58,6 +58,7 @@ function vols(event){
       Nvol: rap.Nvol,
       places: rap.places,
     };
+    calculplaces(vol);
     var client= {
         prenom : document.getElementById("prenom").value,
         nom:document.getElementById("nom").value,
@@ -141,4 +142,25 @@ function afficherBillet(billet){
     document.getElementById("Bprix").innerHTML = billet.prix + "€";
     document.getElementById("Bclasse").innerHTML = billet.classe;
     document.getElementById("BNvol").innerHTML = billet.Nvol;
+}
+
+
+////Validation des places pour reservation:
+
+async function calculplaces(vol){
+    const url = 'https://flygana.onrender.com/place';
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+
+        const data = await response.json();
+        console.log('Réponse du serveur :', data);
+        afficherBillet(billet);
+    } catch (error) {
+        console.error('Erreur :', error);
+    }
 }

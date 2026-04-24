@@ -95,6 +95,32 @@ app.get('/vol', async (req, res) => {
   const items = await Item.find({Vol : true});  
   res.json(items);
 });
+////////////////////////////////////////////////////////Places
+app.post('/places', async (req, res) => {
+  try {
+ const item = new Item(req.body);
+  await item.save();
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+
+app.post('/place', async (req, res) => {
+  try {
+ const item = await Item.find({vol: null});
+ await item.places++;
+  await item.save();
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+
 
 
 
