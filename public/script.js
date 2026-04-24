@@ -4,7 +4,7 @@ alert("ATTENTION: ce site consiste en un amusement pour collégiens. Evitez d'en
 
 /////////////////////////////////////////////////////////// RECUP/AFFICHER VOLS
 
-async function getData(){
+async function getDataVol(){
 const url = 'https://flygana.onrender.com/vol';
     try {
         const response = await fetch(url, {
@@ -21,7 +21,7 @@ const url = 'https://flygana.onrender.com/vol';
         throw error;
     } 
 }
-getData();
+getDataVol();
 
 
 
@@ -61,7 +61,6 @@ function vols(event){
     resplaces(vol);
 }
 function volssuite(vol){
-    addplaces(vol);
     var client= {
         prenom : document.getElementById("prenom").value,
         nom:document.getElementById("nom").value,
@@ -72,23 +71,6 @@ function volssuite(vol){
 }
 
 //Compteur de places
-
-async function addplaces(vol){
-    const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`;
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-
-        const data = await response.json();
-        console.log('Réponse du serveur pour postplaces:', data);
-    } catch (error) {
-        console.error('Erreur :', error);
-    }
-}
 
 async function resplaces(vol){
 const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`;
@@ -101,7 +83,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
         console.log(data);
-        if (data[0].vplaces < data[0].places){
+        if (data < vol.places){
             volssuite(vol);
         } else {
             alert("Désolé, il n'y a plus de places dans l'avion");

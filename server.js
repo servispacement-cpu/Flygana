@@ -36,7 +36,6 @@ const itemSchema = new mongoose.Schema({
   classe: String,
   Nvol: String,
   places: Number,
-  vplaces: Number,
   Vol: Boolean,
   dist: Number,
 });
@@ -74,7 +73,7 @@ app.get('/billets', async (req, res) => {
 
 
 app.delete('/delBil/:Nvol', async (req, res) => {
-  const item = req.params.Nvol;
+  const item = decodeURIComponent(req.params.Nvol);
   await Item.deleteMany({Nvol: item});
   res.json({ deleted: item });
 });
@@ -99,26 +98,10 @@ app.get('/vol', async (req, res) => {
 ////////////////////////////////////////////////////////Places
 
 
-app.post('/place/:Nvol', async (req, res) => {
-  try {
-  const Nvol = decodeURIComponent(req.params.Nvol);
- const item = await Item.findOne({Vol: true, Nvol: Nvol});
-  await item.updateOne({
-    $inc: { vplaces: 1 }
-  });
-  if (!item) {
-  return res.status(404).json({ message: "Item not found" });
-}
-  res.json(item);
-  } catch (error){
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
 
 app.get('/place/:Nvol', async (req, res) => {
   const Nvol = decodeURIComponent(req.params.Nvol);
-  const item = await Item.find({Vol : true, Nvol: Nvol});  
+  const item = await Item.countDocuments({Vol : false, Nvol: Nvol});  
   res.json(item);
 });
 
