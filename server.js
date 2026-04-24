@@ -36,6 +36,7 @@ const itemSchema = new mongoose.Schema({
   classe: String,
   Nvol: String,
   places: Number,
+  vplaces: Number,
   Vol: Boolean,
   dist: Number,
 });
@@ -108,12 +109,15 @@ app.post('/places', async (req, res) => {
 });
 
 
-app.post('/place', async (req, res) => {
+app.post('/place/:Nvol', async (req, res) => {
   try {
- const item = await Item.find({vol: null});
+ const item = await Item.findOne({Vol: null, Nvol: req.params.Nvol});
   await item.updateOne({
-    $inc: { places: 1 }
+    $inc: { vplaces: 1 }
   });
+  if (!item) {
+  return res.status(404).json({ message: "Item not found" });
+}
   res.json(item);
   } catch (error){
     console.error(error);

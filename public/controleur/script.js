@@ -123,7 +123,7 @@ async function createVol(event){
         const response = await fetch(url2, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({places : vol.places, Nvol: vol.Nvol}),
+            body: JSON.stringify({places : vol.places, vplaces: 0 , Nvol: vol.Nvol}),
         });
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);

@@ -148,7 +148,7 @@ function afficherBillet(billet){
 ////Validation des places pour reservation:
 
 async function calculplaces(vol){
-    const url = 'https://flygana.onrender.com/place';
+    const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -159,7 +159,6 @@ async function calculplaces(vol){
 
         const data = await response.json();
         console.log('Réponse du serveur :', data);
-        afficherBillet(billet);
     } catch (error) {
         console.error('Erreur :', error);
     }
