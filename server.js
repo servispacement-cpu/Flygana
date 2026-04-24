@@ -111,8 +111,9 @@ app.post('/places', async (req, res) => {
 app.post('/place', async (req, res) => {
   try {
  const item = await Item.find({vol: null});
- await item.places++;
-  await item.save();
+  await item.updateOne({
+    $inc: { places: 1 }
+  });
   res.json(item);
   } catch (error){
     console.error(error);
