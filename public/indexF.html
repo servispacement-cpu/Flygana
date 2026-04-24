@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="style.css">
+    <title>Flygana Reservation</title>
+    </head>
+    <body>
+        <div class="un">
+            <h1>Bienvenue sur la page officiele de réservation des compagnies aériennes Flygana</h1>
+            <p>Flygana, société libérale d'opération aérienne basée à Orly terminal x</p>
+        </div>
+        
+        <div class="un">
+            <form>
+            <label>Entrez votre prénom
+                <input id="prenom" type="text">
+            </label> <br><br>
+            <label>Entrez votre nom
+                <input id="nom" type="text">
+            </label> <br><br>
+            
+            <label>Vos désirez réserver un vol:</label>
+            <select id="vol">
+            </select> <br><br>
+            <label>Votre classe est:</label>
+            <select id="classe">
+                <option value="première">Première</option>
+                <option value="deuxième">Deuxième</option>
+            </select> <br><br>
+            <button type="button" onclick="vols(event)">Valider la réservation </button>
+            <p>N'appuiyer qu'une seule fois puis vérifier le billet</p>
+        </form>
+        </div>
+
+
+        <div class="un">
+            <h1>Votre billet:</h1>
+            <h3>Nom : <span id="Bnom"></span></h3>
+            <h3>Prénom : <span id="Bprenom"></span></h3>
+            <h3>Départ : <span id="Bdepart"></span></h3>
+            <h3>Arrivée : <span id="Barrivee"></span></h3>
+            <h3>Horaire de départ : <span id="Bhoraire"></span></h3>
+            <h3>Temps de vol : <span id="Btmps"></span></h3>
+            <h3>Prix : <span id="Bprix"></span></h3>
+            <h3>Classe : <span id="Bclasse"></span></h3>
+            <h3>Numéro de vol : <span id="BNvol"></span></h3>
+            <h3>Opéré par les Companies Aériennes FLYGANA AIRLINES BASED IN PARIS ORY Tx</h3>
+            <p>Ce billet, seulement accesible avant rafraîchissement de cette page, est à enregister 
+                au moyen d'une digne capture d'écran le plus rapidement possible. Si vos données sont affichées, votre billet a été 
+            enregistré dans nos bases de donées</p>
+        </div>
+        
+
+        <script src="script.js"></script>
+    </body>
+</html>

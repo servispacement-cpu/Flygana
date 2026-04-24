@@ -1,56 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="style.css">
-    <title>Flygana</title>
+        <link rel="stylesheet" href="style.css">
+        <title>Flygana description</title
     </head>
     <body>
         <div class="un">
-            <h1>Bienvenue sur le site officiel des compagnies aériennes Flygana</h1>
-            <p>Flygana, société libérale d'opération aérienne basée à Orly terminal x</p>
-        </div>
-        
-        <div class="un">
-            <form>
-            <label>Entrez votre prénom
-                <input id="prenom" type="text">
-            </label> <br><br>
-            <label>Entrez votre nom
-                <input id="nom" type="text">
-            </label> <br><br>
-            
-            <label>Vos désirez réserver un vol:</label>
-            <select id="vol">
-            </select> <br><br>
-            <label>Votre classe est:</label>
-            <select id="classe">
-                <option value="première">Première</option>
-                <option value="deuxième">Deuxième</option>
-            </select> <br><br>
-            <button type="button" onclick="vols(event)">Valider la réservation </button>
-            <p>N'appuiyer qu'une seule fois puis vérifier le billet</p>
-        </form>
-        </div>
+             <h1>Bienvenue sur le site officiel des compagnies aériennes Flygana</h1>  
+             <p>Basées à Orly terminal x, nous représentons la majeure partie du transport aérien low-cost et associatif</p>      
+            </div>
+            <div class="un">
+                <h3>Notre compagnie propose des vols de qualité à travers le monde pour des prix calculés, opérés par des pilotes certifiés.</h3>
+                <p>Notre assoction 'Flygana Airplane Association' permet, à raison de chaque billet acheté, une contribution pour soutenir l'avenir des enfants en difficulté. 
+               Nous avons la grande joie d'intégrer le service <a onclick="doctocav()"> doctocav</a> dans notre projet social commun.     
+                </p>
+                <button onclick="voler()">Cliquez ici pour réserver un vol</button>
+            </div>
+            <div class="un">
+                <h3>Notre compagnie a la particularité de frabriquer elle même ses avions: </h3>
+                    <p>nous disposons de centres techniques d'ingiénérie aérienne puissants, de la conception de l'engin à la mise en service, en passant 
+                    par le centre d'essai.</p>
+                     <h4>Centre de production de Troupomé-dubourginon :</h4><img src="moteur.jpeg">
+                    <h4>Centre d'essais de Pétaouchnock-Les-Oies :</h4><img src="cessai.jpeg">
+                    <img src="pilote.jpeg">
+            </div>
+            <div class="un">
+                <h1>Quelques démonstrations de pilotage profesionel :</h1>
+                
+                <h3>Pilotage 1 : </h3> <video controls src="pilotage.MOV"></video><br>
+                <h3>Pilotage 2 : </h3><video controls src="crash.MOV"></video>
+            </div>
+            <script>
+                function voler(){
+                    window.location.href = "indexF.html";
+                }
 
-
-        <div class="un">
-            <h1>Votre billet:</h1>
-            <h3>Nom : <span id="Bnom"></span></h3>
-            <h3>Prénom : <span id="Bprenom"></span></h3>
-            <h3>Départ : <span id="Bdepart"></span></h3>
-            <h3>Arrivée : <span id="Barrivee"></span></h3>
-            <h3>Horaire de départ : <span id="Bhoraire"></span></h3>
-            <h3>Temps de vol : <span id="Btmps"></span></h3>
-            <h3>Prix : <span id="Bprix"></span></h3>
-            <h3>Classe : <span id="Bclasse"></span></h3>
-            <h3>Numéro de vol : <span id="BNvol"></span></h3>
-            <h3>Opéré par les Companies Aériennes FLYGANA AIRLINES BASED IN PARIS ORY Tx</h3>
-            <p>Ce billet, seulement accesible avant rafraîchissement de cette page, est à enregister 
-                au moyen d'une digne capture d'écran le plus rapidement possible. Si vos données sont affichées, votre billet a été 
-            enregistré dans nos bases de donées</p>
-        </div>
-        
-
-        <script src="script.js"></script>
+                function doctocav(){
+                    window.location.href = "https://doctocav.onrender.com";
+                }
+            </script>
     </body>
 </html>

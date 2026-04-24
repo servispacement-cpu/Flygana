@@ -31,11 +31,24 @@ html{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+a{
+    color: blue;
+    text-decoration: underline;
+}
+
 img{
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
     border: 5px outset black;
     border-radius: 15px;
+}
+
+video{
+    width: 40%;
+    height: 40%;
+    border: 5px outset black;
+    border-radius: 15px;
+    margin:40px;
 }
 
 select {
