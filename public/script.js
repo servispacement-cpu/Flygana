@@ -58,6 +58,7 @@ function vols(event){
       Nvol: rap.Nvol,
       places: rap.places,
     };
+    addplaces(vol);
     resplaces(vol);
     var client= {
         prenom : document.getElementById("prenom").value,
@@ -147,7 +148,7 @@ function afficherBillet(billet){
 
 ////Validation des places pour reservation:
 
-async function calculplaces(vol){
+async function addplaces(vol){
     const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
     try {
         const response = await fetch(url, {
@@ -158,7 +159,7 @@ async function calculplaces(vol){
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
 
         const data = await response.json();
-        console.log('Réponse du serveur :', data);
+        console.log('Réponse du serveur pour postplaces:', data);
     } catch (error) {
         console.error('Erreur :', error);
     }
@@ -175,6 +176,7 @@ const url = `https://flygana.onrender.com/place/${vol.Nvol}`;
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
         console.log(data);
+        return data;
     } catch (error) {
         console.error('Erreur :', error);
         throw error;
