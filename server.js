@@ -125,6 +125,11 @@ app.post('/place/:Nvol', async (req, res) => {
   }
 });
 
+app.get('/place/:Nvol', async (req, res) => {
+  const item = await Item.find({Vol : null, Nvol: req.params.Nvol});  
+  res.json(item);
+});
+
 
 
 
