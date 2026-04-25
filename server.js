@@ -106,9 +106,17 @@ app.get('/place/:Nvol', async (req, res) => {
 });
 
 
+////////////////////////////////////////  Verif Nvol exist
 
-
-
+app.get('/vNvol/:Nvol', async (req, res) => {
+  const Nvol = decodeURIComponent(req.params.Nvol);
+  const item = await Item.findOne({Nvol: Nvol});
+  if (item){  
+  res.json(false);
+  } else {
+    res.json(true);
+  }
+});
 
 app.use(express.static("public"));
 

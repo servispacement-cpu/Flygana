@@ -1,4 +1,8 @@
 
+
+////////////////////////////Billets
+
+
 async function getBillet(){
         const url = 'https://flygana.onrender.com/billets';
     try {
@@ -64,7 +68,7 @@ async function afficherBillet(){
 afficherBillet();
 
 
-//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////   sup vol
 document.getElementById("supbil").addEventListener("click" , delBil );
 
 async function delBil(){
@@ -84,7 +88,7 @@ async function delBil(){
     } 
     } 
 
-///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////  créer vol
 
 async function createVol(event){
     const vol = {
@@ -101,6 +105,11 @@ async function createVol(event){
         return;
     } 
     event.preventDefault();
+    const NvolValid = await verifNvol(vol.Nvol);
+    if (NvolValid === false){
+        alert("Ce numéro de vol a déjà été utilise. Veuillez en saisir un autre.")
+        return;
+    }
     const url = 'https://flygana.onrender.com/vol';
     try {
         const response = await fetch(url, {
@@ -121,4 +130,19 @@ async function createVol(event){
 
 
 
+async function verifNvol(Nvol){
+        const url = `https://flygana.onrender.com/vNvol/${encodeURIComponent(Nvol)}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        return(data);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
+}
