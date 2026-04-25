@@ -82,7 +82,7 @@ async function delBil(){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        alert("Les billets du vol " + data.deleted +" ont été supprimés. Veillez rafraichir la page.");
+        alert("Le vol " + data.deleted +" a été supprimés. Veillez rafraichir la page.");
     } catch (error) {
         console.error('Erreur :', error);
     } 
@@ -140,7 +140,7 @@ async function verifNvol(Nvol){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("ce billet a déjà été utilisé ?" + data);
+        console.log("ce billet a déjà été utilisé ? " + data);
         return(data);
     } catch (error) {
         console.error('Erreur :', error);
