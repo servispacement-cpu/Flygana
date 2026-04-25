@@ -105,8 +105,8 @@ async function createVol(event){
         return;
     } 
     event.preventDefault();
-    const NvolValid = await verifNvol(vol.Nvol);
-    if (NvolValid === false){
+    const NvolUt = await verifNvol(vol.Nvol);
+    if (NvolUt === true){
         alert("Ce numéro de vol a déjà été utilise. Veuillez en saisir un autre.")
         return;
     }
@@ -140,6 +140,7 @@ async function verifNvol(Nvol){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
+        console.log("ce billet a déjà été utilisé ?" + data);
         return(data);
     } catch (error) {
         console.error('Erreur :', error);

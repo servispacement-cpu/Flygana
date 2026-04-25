@@ -112,9 +112,9 @@ app.get('/vNvol/:Nvol', async (req, res) => {
   const Nvol = decodeURIComponent(req.params.Nvol);
   const item = await Item.findOne({Nvol: Nvol});
   if (item){  
-  res.json(false);
+  res.json(true);
   } else {
-    res.json(true);
+    res.json(false);
   }
 });
 
