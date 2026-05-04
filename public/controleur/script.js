@@ -39,6 +39,7 @@ async function afficherBillet(){
         const h3a = document.createElement("h3");
         const h3h = document.createElement("h3");
         const h3c = document.createElement("h3");
+        const h3pr = document.createElement("h3");
         const h3nv = document.createElement("h3");
         const hr = document.createElement("hr");
         const opt = document.createElement("option");
@@ -48,6 +49,7 @@ async function afficherBillet(){
         h3a.textContent = "Aeroport d'arivee du client: " + data[i].arrivee;
         h3h.textContent = "Horaire du vol du client: "+data[i].horaire;
         h3c.textContent = "Classe de vol du client: " +data[i].classe;
+        h3c.textContent = "Argent gagné par ce vol (en €): " +data[i].prix;
         h3nv.textContent = "Numéro de vol: " +data[i].Nvol;
         opt.textContent = data[i].Nvol;
         div.appendChild(h3p);

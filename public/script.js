@@ -38,7 +38,7 @@ function afficherVol(data){
     }
     datavols.push(vol);
     const opt = document.createElement("option");
-    opt.textContent = vol.depart + "/" + vol.arrivee;
+    opt.textContent = vol.depart + "/" + vol.arrivee + ", à " + vol.horaire;
     opt.value = vol.Nvol;
     document.getElementById("vol").appendChild(opt);
     }
@@ -90,7 +90,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
         if (data < vol.places){
             volssuite(vol);
         } else {
-            alert("Désolé, il n'y a plus de places dans l'avion");
+            alert("Désolé, il n'y a plus de places dans l'avion pour la classe " + vol.classe);
         }
     } catch (error) {
         console.error('Erreur :', error);
