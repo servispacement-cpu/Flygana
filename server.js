@@ -35,7 +35,8 @@ const itemSchema = new mongoose.Schema({
   tmps: Number,
   classe: String,
   Nvol: String,
-  places: Number,
+  places1: Number,
+  places2: Number,
   Vol: Boolean,
   dist: Number,
 });
@@ -99,9 +100,10 @@ app.get('/vol', async (req, res) => {
 
 
 
-app.get('/place/:Nvol', async (req, res) => {
+app.get('/place/:Nvol/:classe', async (req, res) => {
   const Nvol = decodeURIComponent(req.params.Nvol);
-  const item = await Item.countDocuments({Vol : false, Nvol: Nvol});  
+  const classe=decodeURIComponent(req.params.classe);
+  const item = await Item.countDocuments({Vol : false, Nvol: Nvol, classe: classe});  
   res.json(item);
 });
 

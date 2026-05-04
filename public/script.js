@@ -32,7 +32,8 @@ function afficherVol(data){
     arrivee: data[i].arrivee,
     horaire: data[i].horaire,
     dist: data[i].dist,
-    places: data[i].places,
+    places1: data[i].places1,
+    places2:data[i].places2,
     Nvol: data[i].Nvol,
     }
     datavols.push(vol);
@@ -57,6 +58,7 @@ function vols(event){
       horaire: rap.horaire,
       Nvol: rap.Nvol,
       places: rap.places,
+      classe: document.getElementById("classe").value,
     };
     resplaces(vol);
 }
@@ -66,14 +68,14 @@ function volssuite(vol){
         nom:document.getElementById("nom").value,
     }
     var classe= document.getElementById("classe").value;
-    calculer(vol, classe, client);
+    calculer(vol, client);
     event.preventDefault();
 }
 
 //Compteur de places
 
-async function resplaces(vol){
-const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`;
+async function resplaces(vol, classe){
+const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/${encodeURIComponent(classe)}`;
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -82,7 +84,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("Nombre de billet pris pour " + vol.Nvol+ " : " + data);
+        console.log("Nombre de billet pris pour " + vol.Nvol + "pour la classe " + vol.classe  + " : " + data);
         if (data < vol.places){
             volssuite(vol);
         } else {
@@ -97,10 +99,10 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}`
 
 //Calcul des données supplémentaire (prix, temps)
 
-function calculer(vol, classe, client){
-    if (classe === "première") {
+function calculer(vol, client){
+    if (vol.classe === "première") {
         var x = 10;
-    } else if (classe === "deuxième"){
+    } else if (vol.classe === "deuxième"){
         var x = 5;
     }
     var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
@@ -110,7 +112,7 @@ function calculer(vol, classe, client){
     } else if (vol.dist > 10000){
         var tmps= vol.dist / 1200;       
     }
-    post(client, vol, prix, tmps, classe);
+    post(client, vol, prix, tmps);
 }
 
 
@@ -119,7 +121,7 @@ function calculer(vol, classe, client){
 //envoi du billet DB
 
 
- async function post(client, vol, prix, tmps, classe){
+ async function post(client, vol, prix, tmps){
     const billet ={
         Pclient:client.prenom,
         Nclient:client.nom,
@@ -128,7 +130,7 @@ function calculer(vol, classe, client){
         horaire: vol.horaire,
         prix,
         tmps,
-        classe,
+        classe: vol.classe,
         Nvol: vol.Nvol,
         Vol: false, 
     }

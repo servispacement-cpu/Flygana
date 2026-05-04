@@ -96,7 +96,8 @@ async function createVol(event){
         arrivee: document.getElementById("Aarr").value,
         dist:  document.getElementById("dist").value,
         horaire:  document.getElementById("horaire").value,
-        places:  document.getElementById("places").value,
+        places1:  document.getElementById("places1").value,
+        places2:  document.getElementById("places2").value,
         Nvol:  document.getElementById("Nvol").value,
         Vol: true,
     };
