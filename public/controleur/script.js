@@ -141,7 +141,7 @@ async function verifNvol(Nvol){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("ce billet a déjà été utilisé ? " + data);
+        console.log("ce numéro de vol a-t-il déjà été utilisé ? " + data);
         return(data);
     } catch (error) {
         console.error('Erreur :', error);

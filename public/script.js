@@ -58,7 +58,7 @@ function vols(event){
       horaire: rap.horaire,
       Nvol: rap.Nvol,
       classe: document.getElementById("classe").value,
-      places,
+      places: undefined,
     };
     if (vol.classe === "première"){vol.places = rap.places1;}
     else if (vol.classe === "deuxième"){vol.places = rap.places2;}
