@@ -57,9 +57,11 @@ function vols(event){
       dist: rap.dist,
       horaire: rap.horaire,
       Nvol: rap.Nvol,
-      places: rap.places,
       classe: document.getElementById("classe").value,
+      places,
     };
+    if (vol.classe === "première"){vol.places = rap.places1;}
+    else if (vol.classe === "deuxième"){vol.places = rap.places2;}
     resplaces(vol);
 }
 function volssuite(vol){
@@ -74,8 +76,8 @@ function volssuite(vol){
 
 //Compteur de places
 
-async function resplaces(vol, classe){
-const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/${encodeURIComponent(classe)}`;
+async function resplaces(vol){
+const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/${encodeURIComponent(vol.classe)}`;
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -84,7 +86,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("Nombre de billet pris pour " + vol.Nvol + "pour la classe " + vol.classe  + " : " + data);
+        console.log("Nombre de billet pris pour " + vol.Nvol + " pour la classe " + vol.classe  + " : " + data);
         if (data < vol.places){
             volssuite(vol);
         } else {
