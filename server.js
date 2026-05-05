@@ -107,6 +107,13 @@ app.get('/place/:Nvol/:classe', async (req, res) => {
   res.json(item);
 });
 
+app.get('/placett/:Nvol', async (req, res) => {
+  const Nvol = decodeURIComponent(req.params.Nvol);
+  const item1 = await Item.countDocuments({Vol : false, Nvol: Nvol, classe: "première"});
+  const item2 = await Item.countDocuments({Vol : false, Nvol: Nvol, classe: "deuxième"});    
+  res.json(item1, item2);
+});
+
 
 ////////////////////////////////////////  Verif Nvol exist
 

@@ -134,7 +134,9 @@ function calculer(vol, client){
         tmps,
         classe: vol.classe,
         Nvol: vol.Nvol,
-        Vol: false, 
+        Vol: false,
+        places1,
+        places2, 
     }
     const url = 'https://flygana.onrender.com/billet';
     try {

@@ -22,6 +22,26 @@ async function getBillet(){
 
 
 
+async function getPlaces(Nvol){
+const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json(resbil1, resbil2);
+        console.log("Nombre de billet pris pour " + Nvol +  " pour la première classe : " + data.resbil1);
+        console.log("Nombre de billet pris pour " + Nvol +  " pour la pdeuxième classe : " + data.resbil2);
+        return(resbil1, resbil2);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
+}
+
+
 
 
 async function afficherBillet(){
@@ -61,7 +81,19 @@ async function afficherBillet(){
         div.appendChild(h3nv);
         div.appendChild(hr);
         document.getElementById("delBilSet").appendChild(opt);
-    }
+        ////Div stats
+        const dstat = document.createElement("div");
+        div.appendChild(dstat);
+        const statprix = document.createElement("h3");
+        const statplaces1 = document.createElement("h3");
+        const statplaces2 = document.createElement("h3");
+        let datastatprix = 0;
+        datastatprix += data[i].prix;
+        statprix.textContent = "Recettes du vol " + data[i].Nvol + " : " + datastatprix;
+        const resbil = await getPlaces(data[i].Nvol);
+        statplaces1.textContent = "Nombre de places réservées en première : " + resbil.resbil1;
+        statplaces2.textContent = "Nombre de places réservées en première : " + resbil.resbil2;
+        }
     } catch(err){
         console.error(err);
     }
