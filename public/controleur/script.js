@@ -23,7 +23,7 @@ async function getBillet(){
 
 
 async function getPlaces(Nvol){
-const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}}`;
+const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}`;
     try {
         const response = await fetch(url, {
             method: 'GET',
