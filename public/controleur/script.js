@@ -33,7 +33,7 @@ const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}`;
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
         console.log("Nombre de billet pris pour " + Nvol +  " pour la première classe : " + data.resbil1);
-        console.log("Nombre de billet pris pour " + Nvol +  " pour la pdeuxième classe : " + data.resbil2);
+        console.log("Nombre de billet pris pour " + Nvol +  " pour la deuxième classe : " + data.resbil2);
         return(data);
     } catch (error) {
         console.error('Erreur :', error);
@@ -42,8 +42,8 @@ const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}`;
 }
 
 
-async function getNumberVol(){
-const url = 'https://flygana.onrender.com/numberVol';
+async function getDataVol(){
+const url = 'https://flygana.onrender.com/vol';
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -52,8 +52,8 @@ const url = 'https://flygana.onrender.com/numberVol';
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("Nombre de vols " + data);
-        afficherVol(data);
+        console.log(data);
+        return(data);
     } catch (error) {
         console.error('Erreur :', error);
         throw error;
@@ -80,40 +80,61 @@ async function afficherBillet(){
         const h3pr = document.createElement("h3");
         const h3nv = document.createElement("h3");
         const hr = document.createElement("hr");
-        const opt = document.createElement("option");
         h3p.textContent = "Prenom du client: " + data[i].Pclient;
         h3n.textContent = "Nom du client: " + data[i].Nclient;
         h3d.textContent = "Aeroport de depart du client: " + data[i].depart;
         h3a.textContent = "Aeroport d'arivee du client: " + data[i].arrivee;
         h3h.textContent = "Horaire du vol du client: "+data[i].horaire;
         h3c.textContent = "Classe de vol du client: " +data[i].classe;
-        h3c.textContent = "Argent gagné par ce vol (en €): " +data[i].prix;
+        h3pr.textContent = "Argent gagné par ce billet (en €): " +data[i].prix;
         h3nv.textContent = "Numéro de vol: " +data[i].Nvol;
-        opt.textContent = data[i].Nvol;
         div.appendChild(h3p);
         div.appendChild(h3n);
         div.appendChild(h3d);
         div.appendChild(h3a);
         div.appendChild(h3h);
         div.appendChild(h3c);
+        div.appendChild(h3pr);
         div.appendChild(h3nv);
         div.appendChild(hr);
-        document.getElementById("delBilSet").appendChild(opt);
         }
-        const numbervol = await getNumberVol();
-        ////Div stats
-        for (let i = 0; i<numbervol ; i++){
-        const dstat = document.createElement("div");
-        div.appendChild(dstat);
+        const datavol = await getDataVol();
+        ////Div stats ++ opt supVol
+        for (let i = 0; i<datavol.length ; i++){
+        const opt = document.createElement("option");     //options de supVol
+        opt.textContent = data[i].Nvol;
+        document.getElementById("delBilSet").appendChild(opt);
+        const tit = document.createElement("h2");
+        const idstat = document.getElementById("parentStat");  //get parent for stats
         const statprix = document.createElement("h3");
         const statplaces1 = document.createElement("h3");
         const statplaces2 = document.createElement("h3");
-        let datastatprix = 0;
-        datastatprix += data[i].prix;
-        statprix.textContent = "Recettes du vol " + data[i].Nvol + " : " + datastatprix;
+        const places1 = document.createElement("h3");
+        const places2 = document.createElement("h3");
+        const renta = document.createElement("h3");
+        const hrs = document.createElement("hr");
+
+        tit.textContent = "Pour le vol " + data[i].Nvol + " :";
+            //recettes du vol
+        statprix.textContent = "Recettes du vol : " + data.reduce((acc, obj) => acc + obj.prix, 0) + " €";
+            //nbr de billets reservés
         const resbil = await getPlaces(data[i].Nvol);
         statplaces1.textContent = "Nombre de places réservées en première : " + resbil.resbil1;
-        statplaces2.textContent = "Nombre de places réservées en première : " + resbil.resbil2;
+        statplaces2.textContent = "Nombre de places réservées en deuxième : " + resbil.resbil2;
+            //nbr de places restantes
+        places1.textContent = "Nombre de places restantes en première : " + (datavol[i].places1 - resbil.resbil1);
+        places2.textContent = "Nombre de places restantes en deuxième : " + (datavol[i].places2 - resbil.resbil2);
+            //Rentabilité
+        renta.textContent = "Rentabilité du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
+
+        idstat.appendChild(tit);
+        idstat.appendChild(statprix);
+        idstat.appendChild(statplaces1);
+        idstat.appendChild(statplaces2);
+        idstat.appendChild(places2);
+        idstat.appendChild(places1);
+        idstat.appendChild(renta);
+        idstat.appendChild(hrs);
         }
     } catch(err){
         console.error(err);
