@@ -42,6 +42,24 @@ const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}`;
 }
 
 
+async function getNumberVol(){
+const url = 'https://flygana.onrender.com/numberVol';
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        console.log("Nombre de vols " + data);
+        afficherVol(data);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
+}
+
 
 
 async function afficherBillet(){
@@ -51,8 +69,8 @@ async function afficherBillet(){
         //créer x divs en fct du nombre de Nvol diff.
         //const x = new Set(data.map(item => item.Nvol)).size;   
         //Regrouper chaque billet dans la div qui corespond à son Nvol
-        for (let i = 0; i < data.length; i++){
         const div = document.getElementById("cont");
+        for (let i = 0; i < data.length; i++){
         const h3p = document.createElement("h3");
         const h3n = document.createElement("h3");
         const h3d = document.createElement("h3");
@@ -81,7 +99,10 @@ async function afficherBillet(){
         div.appendChild(h3nv);
         div.appendChild(hr);
         document.getElementById("delBilSet").appendChild(opt);
+        }
+        const numbervol = await getNumberVol();
         ////Div stats
+        for (let i = 0; i<numbervol ; i++){
         const dstat = document.createElement("div");
         div.appendChild(dstat);
         const statprix = document.createElement("h3");

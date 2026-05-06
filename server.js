@@ -96,6 +96,12 @@ app.get('/vol', async (req, res) => {
   const items = await Item.find({Vol : true});  
   res.json(items);
 });
+
+app.get('/numberVol', async (req, res) => {
+  const items = await Item.countDocuments({Vol : true});  
+  res.json(items);
+});
+
 ////////////////////////////////////////////////////////Places
 
 
