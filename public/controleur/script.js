@@ -13,27 +13,7 @@ async function getBillet(){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        return(data);
-    } catch (error) {
-        console.error('Erreur :', error);
-        throw error;
-    } 
-}
-
-
-
-async function getPlaces(Nvol){
-const url = `https://flygana.onrender.com/placett/${encodeURIComponent(Nvol)}`;
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-        const data = await response.json();
-        console.log("Nombre de billet pris pour " + Nvol +  " pour la première classe : " + data.resbil1);
-        console.log("Nombre de billet pris pour " + Nvol +  " pour la deuxième classe : " + data.resbil2);
+        console.log(data);
         return(data);
     } catch (error) {
         console.error('Erreur :', error);
@@ -65,10 +45,6 @@ const url = 'https://flygana.onrender.com/vol';
 async function afficherBillet(){
     try{
         const data = await getBillet();
-        console.log(data);
-        //créer x divs en fct du nombre de Nvol diff.
-        //const x = new Set(data.map(item => item.Nvol)).size;   
-        //Regrouper chaque billet dans la div qui corespond à son Nvol
         const div = document.getElementById("cont");
         for (let i = 0; i < data.length; i++){
         const h3p = document.createElement("h3");
@@ -98,11 +74,19 @@ async function afficherBillet(){
         div.appendChild(h3nv);
         div.appendChild(hr);
         }
+        afficherStats(data);
+    } catch(err){
+        console.error(err);
+    }
+}
+afficherBillet();
+
+
+    async function afficherStats(databillets){
         const datavol = await getDataVol();
-        ////Div stats ++ opt supVol
         for (let i = 0; i<datavol.length ; i++){
         const opt = document.createElement("option");     //options de supVol
-        opt.textContent = data[i].Nvol;
+        opt.textContent = datavol[i].Nvol;
         document.getElementById("delBilSet").appendChild(opt);
         const tit = document.createElement("h2");
         const idstat = document.getElementById("parentStat");  //get parent for stats
@@ -114,35 +98,30 @@ async function afficherBillet(){
         const renta = document.createElement("h3");
         const hrs = document.createElement("hr");
 
-        tit.textContent = "Pour le vol " + data[i].Nvol + " :";
-            //recettes du vol
-        statprix.textContent = "Recettes du vol : " + data.reduce((acc, obj) => acc + obj.prix, 0) + " €";
+        tit.textContent = "Pour le vol " + datavol[i].Nvol + " :";
+            //recettes du vol.
+        const volq = databillets.filter(billet => billet.Nvol === datavol[i].Nvol)
+        statprix.textContent = "Recettes du vol : " + volq.reduce((acc, obj) => acc + obj.prix, 0) + " €";
             //nbr de billets reservés
-        const resbil = await getPlaces(data[i].Nvol);
+        const resbil = { resbil1: volq.filter(billet => billet.classe === "première").length,  resbil2: volq.filter(billet => billet.classe === "deuxième").length,}
         statplaces1.textContent = "Nombre de places réservées en première : " + resbil.resbil1;
         statplaces2.textContent = "Nombre de places réservées en deuxième : " + resbil.resbil2;
             //nbr de places restantes
         places1.textContent = "Nombre de places restantes en première : " + (datavol[i].places1 - resbil.resbil1);
         places2.textContent = "Nombre de places restantes en deuxième : " + (datavol[i].places2 - resbil.resbil2);
             //Rentabilité
-        renta.textContent = "Rentabilité du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
+        renta.textContent = "Remplissage du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
 
         idstat.appendChild(tit);
         idstat.appendChild(statprix);
         idstat.appendChild(statplaces1);
         idstat.appendChild(statplaces2);
-        idstat.appendChild(places2);
         idstat.appendChild(places1);
+        idstat.appendChild(places2);
         idstat.appendChild(renta);
         idstat.appendChild(hrs);
         }
-    } catch(err){
-        console.error(err);
     }
-}
-
-afficherBillet();
-
 
 //////////////////////////////////////////////////////////////////////////////////   sup vol
 document.getElementById("supbil").addEventListener("click" , delBil );
