@@ -54,8 +54,8 @@ const Schemav = new mongoose.Schema({
 
 // Define a model based on the schema
 
-const Itemb = mongoose.model('Itemb', Schemab);
-const Itemv = mongoose.model('Itemv', Schemav);
+const Itemb = mongoose.model('Item', Schemab);
+const Itemv = mongoose.model('Item', Schemav);
 
  
 
@@ -124,7 +124,7 @@ app.get('/place/:Nvol/:classe', async (req, res) => {
 
 app.get('/vNvol/:Nvol', async (req, res) => {
   const Nvol = decodeURIComponent(req.params.Nvol);
-  const item = await Item.findOne({Nvol: Nvol});
+  const item = await Itemv.findOne({Nvol: Nvol});
   if (item){  
   res.json(true);
   } else {
