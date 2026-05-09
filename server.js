@@ -54,8 +54,8 @@ const Schemav = new mongoose.Schema({
 
 // Define a model based on the schema
 
-const Itemb = mongoose.model('Item', Schemab);
-const Itemv = mongoose.model('Item', Schemav);
+const Itemb = mongoose.model('Itemb', Schemab);
+const Itemv = mongoose.model('Itemv', Schemav);
 
  
 
