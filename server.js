@@ -25,27 +25,37 @@ mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r
 
 // Define a schema for our data
 
-const itemSchema = new mongoose.Schema({
-  Pclient: String,
-  Nclient:String,
+const Schemab = new mongoose.Schema({
   depart: String,
   arrivee: String,
   horaire: String,
-  prix: Number,
-  tmps: Number,
-  classe: String,
   Nvol: String,
   places1: Number,
   places2: Number,
-  Vol: Boolean,
   dist: Number,
+
+  Pclient: String,
+  Nclient:String,
+  prix: Number,
+  tmps: Number,
+  classe: String,
 });
 
+const Schemav = new mongoose.Schema({
+  depart: String,
+  arrivee: String,
+  horaire: String,
+  Nvol: String,
+  places1: Number,
+  places2: Number,
+  dist: Number,
+});
  
 
 // Define a model based on the schema
 
-const Item = mongoose.model('Item', itemSchema);
+const Itemb = mongoose.model('Item', Schemab);
+const Itemv = mongoose.model('Item', Schemav);
 
  
 
@@ -57,7 +67,7 @@ app.use(cors());
 /////////////////////////////////////////////////////////////  Post/récup les billets quands réservés
 app.post('/billet', async (req, res) => {
   try {
- const item = new Item(req.body);
+ const item = new Itemb(req.body);
   await item.save();
   res.json(item);
   } catch (error){
@@ -67,7 +77,7 @@ app.post('/billet', async (req, res) => {
 });
 
 app.get('/billets', async (req, res) => {
-  const items = await Item.find({Vol : false});  
+  const items = await Itemb.find();  
   res.json(items);
 });
 //////////////////////////////////////////////////////////////////////// Supprimer une fois le vol terminé
@@ -75,7 +85,8 @@ app.get('/billets', async (req, res) => {
 
 app.delete('/delBil/:Nvol', async (req, res) => {
   const item = decodeURIComponent(req.params.Nvol);
-  await Item.deleteMany({Nvol: item});
+  await Itemb.deleteMany({Nvol: item});
+  await Itemv.deleteMany({Nvol: item})
   res.json({ deleted: item });
 });
 
@@ -83,7 +94,7 @@ app.delete('/delBil/:Nvol', async (req, res) => {
 
 app.post('/vol', async (req, res) => {
   try {
- const item = new Item(req.body);
+ const item = new Itemv(req.body);
   await item.save();
   res.json(item);
   } catch (error){
@@ -93,7 +104,7 @@ app.post('/vol', async (req, res) => {
 });
 
 app.get('/vol', async (req, res) => {
-  const items = await Item.find({Vol : true});  
+  const items = await Itemv.find();  
   res.json(items);
 });
 

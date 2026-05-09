@@ -14,8 +14,14 @@ const url = 'https://flygana.onrender.com/vol';
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
+        datavols = data;
+        for (let i = 0; i < data.length; i++){
+        const opt = document.createElement("option");
+        opt.textContent = data[i].depart + "/" + data[i].arrivee + ", à " + data[i].horaire;
+        opt.value = vol.Nvol;
+    document.getElementById("vol").appendChild(opt);
+    }
         console.log(data);
-        afficherVol(data);
     } catch (error) {
         console.error('Erreur :', error);
         throw error;
@@ -25,24 +31,7 @@ getDataVol();
 
 
 
-function afficherVol(data){
-    for (let i = 0; i < data.length; i++){
-    const vol = {
-    depart: data[i].depart,
-    arrivee: data[i].arrivee,
-    horaire: data[i].horaire,
-    dist: data[i].dist,
-    places1: data[i].places1,
-    places2:data[i].places2,
-    Nvol: data[i].Nvol,
-    }
-    datavols.push(vol);
-    const opt = document.createElement("option");
-    opt.textContent = vol.depart + "/" + vol.arrivee + ", à " + vol.horaire;
-    opt.value = vol.Nvol;
-    document.getElementById("vol").appendChild(opt);
-    }
-}
+
 
 
 
@@ -62,9 +51,8 @@ function vols(event){
     };
     if (vol.classe === "première"){vol.places = rap.places1;}
     else if (vol.classe === "deuxième"){vol.places = rap.places2;}
-    resplaces(vol);
-}
-function volssuite(vol){
+    const placeok = resplaces(vol);
+    if (placeok === false){return;}
     var client= {
         prenom : document.getElementById("prenom").value,
         nom:document.getElementById("nom").value,
@@ -88,9 +76,10 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
         const data = await response.json();
         console.log("Nombre de billet pris pour " + vol.Nvol + " pour la classe " + vol.classe  + " : " + data);
         if (data < vol.places){
-            volssuite(vol);
+            return(true);
         } else {
             alert("Désolé, il n'y a plus de places dans l'avion pour la classe " + vol.classe);
+            return(false);
         }
     } catch (error) {
         console.error('Erreur :', error);
@@ -107,8 +96,7 @@ function calculer(vol, client){
     } else if (vol.classe === "deuxième"){
         var x = 5;
     }
-    var prix1= (10/100)*vol.dist+(10/100)*vol.dist+20;
-    var prix= prix1 + (x/100)*prix1;
+    var prix= ((10/100)*vol.dist+(10/100)*vol.dist+20)+(x/100)*(10/100)*vol.dist+(10/100)*vol.dist+20;
     if (vol.dist < 10000){
         var tmps= vol.dist / 900;
     } else if (vol.dist > 10000){
