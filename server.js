@@ -115,7 +115,7 @@ app.get('/vol', async (req, res) => {
 app.get('/place/:Nvol/:classe', async (req, res) => {
   const Nvol = decodeURIComponent(req.params.Nvol);
   const classe=decodeURIComponent(req.params.classe);
-  const item = await Item.countDocuments({Vol : false, Nvol: Nvol, classe: classe});  
+  const item = await Itemb.countDocuments({Nvol: Nvol, classe: classe});  
   res.json(item);
 });
 
