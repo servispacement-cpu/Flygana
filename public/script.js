@@ -19,7 +19,7 @@ const url = 'https://flygana.onrender.com/vol';
         for (let i = 0; i < data.length; i++){
         const opt = document.createElement("option");
         opt.textContent = data[i].depart + "/" + data[i].arrivee + ", à " + data[i].horaire;
-        opt.value = vol.Nvol;
+        opt.value = data[i].Nvol;
     document.getElementById("vol").appendChild(opt);
     }
     } catch (error) {
@@ -38,7 +38,7 @@ getDataVol();
 ////////////////////////////////////////////////////////////////////création du billet
 
 
-function vols(event){
+async function vols(event){
     const rap = datavols.find(v => v.Nvol == document.getElementById("vol").value);
     var vol = {
       départ: rap.depart,
@@ -46,26 +46,28 @@ function vols(event){
       dist: rap.dist,
       horaire: rap.horaire,
       Nvol: rap.Nvol,
-      classe: document.getElementById("classe").value,
       places: undefined,
     };
-    if (vol.classe === "première"){vol.places = rap.places1;}
-    else if (vol.classe === "deuxième"){vol.places = rap.places2;}
-    const placeok = resplaces(vol);
-    if (placeok === false){return;}
     var client= {
-        prenom : document.getElementById("prenom").value,
-        nom:document.getElementById("nom").value,
+    prenom : document.getElementById("prenom").value,
+    nom:document.getElementById("nom").value,
+    classe: document.getElementById("classe").value,
     }
-    var classe= document.getElementById("classe").value;
-    calculer(vol, client);
+    if (client.classe === "première"){vol.places = rap.places1;}
+    else if (client.classe === "deuxième"){vol.places = rap.places2;}
     event.preventDefault();
+    const placeok = await resplaces(vol, client);
+    if (placeok === false){
+        alert("Désolé, il n'y a plus de places dans l'avion pour la classe " + client.classe);
+        return;
+    }
+    calculer(vol, client);
 }
 
 //Compteur de places
 
-async function resplaces(vol){
-const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/${encodeURIComponent(vol.classe)}`;
+async function resplaces(vol, client){
+const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/${encodeURIComponent(client.classe)}`;
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -74,12 +76,11 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        console.log("Nombre de billet pris pour " + vol.Nvol + " pour la classe " + vol.classe  + " : " + data);
+        console.log("Nombre de billet pris pour " + vol.Nvol + " pour la classe " + client.classe  + " : " + data);
         if (data < vol.places){
-            return(true);
+            return (true);
         } else {
-            alert("Désolé, il n'y a plus de places dans l'avion pour la classe " + vol.classe);
-            return(false);
+            return (false);
         }
     } catch (error) {
         console.error('Erreur :', error);
@@ -120,7 +121,7 @@ function calculer(vol, client){
         horaire: vol.horaire,
         prix,
         tmps,
-        classe: vol.classe,
+        classe: client.classe,
         Nvol: vol.Nvol,
         Vol: false, 
     }
