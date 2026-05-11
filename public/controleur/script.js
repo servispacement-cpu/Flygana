@@ -150,6 +150,7 @@ async function createVol(event){
         depart: document.getElementById("Adep").value,
         arrivee: document.getElementById("Aarr").value,
         dist:  document.getElementById("dist").value,
+        date:  document.getElementById("date").value,
         horaire:  document.getElementById("horaire").value,
         places1:  document.getElementById("places1").value,
         places2:  document.getElementById("places2").value,

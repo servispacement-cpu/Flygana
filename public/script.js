@@ -18,7 +18,7 @@ const url = 'https://flygana.onrender.com/vol';
         datavols = data;
         for (let i = 0; i < data.length; i++){
         const opt = document.createElement("option");
-        opt.textContent = data[i].depart + "/" + data[i].arrivee + ", à " + data[i].horaire;
+        opt.textContent = data[i].depart + "/" + data[i].arrivee + ", le " + data[i].date + " à " +data[i].horaire;
         opt.value = data[i].Nvol;
     document.getElementById("vol").appendChild(opt);
     }
@@ -44,12 +44,13 @@ async function vols(event){
       départ: rap.depart,
       arrivée: rap.arrivee,
       dist: rap.dist,
+      date: rap.date,
       horaire: rap.horaire,
       Nvol: rap.Nvol,
       places: undefined,
     };
     var client= {
-    prenom : document.getElementById("prenom").value,
+    prenom: document.getElementById("prenom").value,
     nom:document.getElementById("nom").value,
     classe: document.getElementById("classe").value,
     }

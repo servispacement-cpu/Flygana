@@ -44,6 +44,7 @@ const Schemab = new mongoose.Schema({
 const Schemav = new mongoose.Schema({
   depart: String,
   arrivee: String,
+  date: String,
   horaire: String,
   Nvol: String,
   places1: Number,
