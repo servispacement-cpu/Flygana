@@ -93,12 +93,12 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
 //Calcul des données supplémentaire (prix, temps)
 
 function calculer(vol, client){
-    if (vol.classe === "première") {
+    if (client.classe === "première") {
         var x = 10;
-    } else if (vol.classe === "deuxième"){
+    } else if (client.classe === "deuxième"){
         var x = 5;
     }
-    var prix= ((10/100)*vol.dist+(10/100)*vol.dist+20)+(x/100)*(10/100)*vol.dist+(10/100)*vol.dist+20;
+    var prix= (20/100)*vol.dist+20+(x/100)*(0.1)*vol.dist+(10/100)*vol.dist+20;
     if (vol.dist < 10000){
         var tmps= vol.dist / 900;
     } else if (vol.dist > 10000){
@@ -119,6 +119,7 @@ function calculer(vol, client){
         Nclient:client.nom,
         depart: vol.départ,
         arrivee: vol.arrivée,
+        date: vol.date,
         horaire: vol.horaire,
         prix,
         tmps,

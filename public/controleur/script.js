@@ -60,7 +60,7 @@ async function afficherBillet(){
         h3n.textContent = "Nom du client: " + data[i].Nclient;
         h3d.textContent = "Aeroport de depart du client: " + data[i].depart;
         h3a.textContent = "Aeroport d'arivee du client: " + data[i].arrivee;
-        h3h.textContent = "Horaire du vol du client: "+data[i].horaire;
+        h3h.textContent = "Date et horaire du vol du client : le " + data[i].date + " à " + data[i].horaire;
         h3c.textContent = "Classe de vol du client: " +data[i].classe;
         h3pr.textContent = "Argent gagné par ce billet (en €): " +data[i].prix;
         h3nv.textContent = "Numéro de vol: " +data[i].Nvol;

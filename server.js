@@ -28,6 +28,7 @@ mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r
 const Schemab = new mongoose.Schema({
   depart: String,
   arrivee: String,
+  date: String,
   horaire: String,
   Nvol: String,
   places1: Number,
