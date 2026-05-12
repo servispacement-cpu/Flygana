@@ -49,26 +49,17 @@ async function afficherBillet(){
         for (let i = 0; i < data.length; i++){
         const h3p = document.createElement("h3");
         const h3n = document.createElement("h3");
-        const h3d = document.createElement("h3");
-        const h3a = document.createElement("h3");
-        const h3h = document.createElement("h3");
         const h3c = document.createElement("h3");
         const h3pr = document.createElement("h3");
         const h3nv = document.createElement("h3");
         const hr = document.createElement("hr");
         h3p.textContent = "Prenom du client: " + data[i].Pclient;
         h3n.textContent = "Nom du client: " + data[i].Nclient;
-        h3d.textContent = "Aeroport de depart du client: " + data[i].depart;
-        h3a.textContent = "Aeroport d'arivee du client: " + data[i].arrivee;
-        h3h.textContent = "Date et horaire du vol du client : le " + data[i].date + " à " + data[i].horaire;
         h3c.textContent = "Classe de vol du client: " +data[i].classe;
         h3pr.textContent = "Argent gagné par ce billet (en €): " +data[i].prix;
         h3nv.textContent = "Numéro de vol: " +data[i].Nvol;
         div.appendChild(h3p);
         div.appendChild(h3n);
-        div.appendChild(h3d);
-        div.appendChild(h3a);
-        div.appendChild(h3h);
         div.appendChild(h3c);
         div.appendChild(h3pr);
         div.appendChild(h3nv);
@@ -96,11 +87,12 @@ afficherBillet();
         const places1 = document.createElement("h3");
         const places2 = document.createElement("h3");
         const renta = document.createElement("h3");
+        const recaps = document.createElement("h3");
         const hrs = document.createElement("hr");
 
         tit.textContent = "Pour le vol " + datavol[i].Nvol + " :";
             //recettes du vol.
-        const volq = databillets.filter(billet => billet.Nvol === datavol[i].Nvol)
+        const volq = databillets.filter(billet => billet.Nvol === datavol[i].Nvol) //billets de chaque vol
         statprix.textContent = "Recettes du vol : " + volq.reduce((acc, obj) => acc + obj.prix, 0) + " €";
             //nbr de billets reservés
         const resbil = { resbil1: volq.filter(billet => billet.classe === "première").length,  resbil2: volq.filter(billet => billet.classe === "deuxième").length,}
@@ -111,7 +103,8 @@ afficherBillet();
         places2.textContent = "Nombre de places restantes en deuxième : " + (datavol[i].places2 - resbil.resbil2);
             //Rentabilité
         renta.textContent = "Remplissage du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
-
+            //Recaps (date, horaire, temps)
+            recaps.textContent = "Vol le " + datavol[i].date + " à " + datavol[i].horaire + ", pendant " + volq[0].tmps + " heures." ;
         idstat.appendChild(tit);
         idstat.appendChild(statprix);
         idstat.appendChild(statplaces1);
@@ -119,6 +112,7 @@ afficherBillet();
         idstat.appendChild(places1);
         idstat.appendChild(places2);
         idstat.appendChild(renta);
+        idstat.appendChild(recaps);
         idstat.appendChild(hrs);
         }
     }
