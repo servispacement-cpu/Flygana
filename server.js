@@ -96,7 +96,16 @@ app.delete('/delBil/:Nvol', async (req, res) => {
 
 app.post('/vol', async (req, res) => {
   try {
- const item = new Itemv(req.body);
+    let tmps;
+    if (req.body.dist < 5000){
+  tmps = req.body.dist/900;
+    } else if (req.body.dist > 5000){
+      tmps = req.body.dist/1100;
+    }
+ const item = new Itemv({
+  ...req.body,
+  tmps,
+ });
   await item.save();
   res.json(item);
   } catch (error){

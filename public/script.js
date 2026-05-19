@@ -43,6 +43,7 @@ async function vols(event){
     var vol = {
       départ: rap.depart,
       arrivée: rap.arrivee,
+      tmps: rap.tmps,
       dist: rap.dist,
       date: rap.date,
       horaire: rap.horaire,
@@ -99,12 +100,7 @@ function calculer(vol, client){
         var x = 5;
     }
     var prix= (20/100)*vol.dist+20+(x/100)*(0.1)*vol.dist+(10/100)*vol.dist+20;
-    if (vol.dist < 10000){
-        var tmps= vol.dist / 900;
-    } else if (vol.dist > 10000){
-        var tmps= vol.dist / 1200;       
-    }
-    post(client, vol, prix, tmps);
+    post(client, vol, prix);
 }
 
 
@@ -113,7 +109,7 @@ function calculer(vol, client){
 //envoi du billet DB
 
 
- async function post(client, vol, prix, tmps){
+ async function post(client, vol, prix){
     const billet ={
         Pclient:client.prenom,
         Nclient:client.nom,
@@ -122,7 +118,7 @@ function calculer(vol, client){
         date: vol.date,
         horaire: vol.horaire,
         prix,
-        tmps,
+        tmps: vol.tmps,
         classe: client.classe,
         Nvol: vol.Nvol,
         Vol: false, 
