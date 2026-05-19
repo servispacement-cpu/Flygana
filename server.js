@@ -51,6 +51,7 @@ const Schemav = new mongoose.Schema({
   places1: Number,
   places2: Number,
   dist: Number,
+  tmps: Number,
 });
  
 
