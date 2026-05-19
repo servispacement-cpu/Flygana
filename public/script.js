@@ -91,7 +91,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
 }
 
 
-//Calcul des données supplémentaire (prix, temps)
+//Calcul des données supplémentaire (prix)
 
 function calculer(vol, client){
     if (client.classe === "première") {

@@ -104,7 +104,7 @@ afficherBillet();
             //Rentabilité
         renta.textContent = "Remplissage du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
             //Recaps (date, horaire, temps)
-            recaps.textContent = "Vol le " + datavol[i].date + " à " + datavol[i].horaire + ", pendant " + volq[0].tmps + " heures." ;
+            recaps.textContent = "Vol le " + datavol[i].date + " à " + datavol[i].horaire + ", pendant " + datavol[i].tmps + " heures." ;
         idstat.appendChild(tit);
         idstat.appendChild(statprix);
         idstat.appendChild(statplaces1);
@@ -156,8 +156,9 @@ async function createVol(event){
         return;
     } 
     event.preventDefault();
-    const NvolUt = await verifNvol(vol.Nvol);
-    if (NvolUt === true){
+    const dataVols = await getDataVol();
+    const NvolUt = dataVols.some(vols => vols.Nvol === vol.Nvol)
+    if (NvolUt){
         alert("Ce numéro de vol a déjà été utilise. Veuillez en saisir un autre.")
         return;
     }
@@ -179,22 +180,3 @@ async function createVol(event){
     } 
 }
 
-
-
-async function verifNvol(Nvol){
-        const url = `https://flygana.onrender.com/vNvol/${encodeURIComponent(Nvol)}`;
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-        const data = await response.json();
-        console.log("ce numéro de vol a-t-il déjà été utilisé ? " + data);
-        return(data);
-    } catch (error) {
-        console.error('Erreur :', error);
-        throw error;
-    } 
-}

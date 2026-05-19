@@ -131,19 +131,6 @@ app.get('/place/:Nvol/:classe', async (req, res) => {
   res.json(item);
 });
 
-
-////////////////////////////////////////  Verif Nvol exist
-
-app.get('/vNvol/:Nvol', async (req, res) => {
-  const Nvol = decodeURIComponent(req.params.Nvol);
-  const item = await Itemv.findOne({Nvol: Nvol});
-  if (item){  
-  res.json(true);
-  } else {
-    res.json(false);
-  }
-});
-
 app.use(express.static("public"));
 
 // Start the server
