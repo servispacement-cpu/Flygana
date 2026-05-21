@@ -131,7 +131,7 @@ async function delBil(){
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        alert("Le vol " + data.deleted +" a été supprimés. Veillez rafraichir la page.");
+        alert("Le vol " + data.deleted +" a été supprimé. Veillez rafraichir la page.");
     } catch (error) {
         console.error('Erreur :', error);
     } 
@@ -152,7 +152,7 @@ async function createVol(event){
         Vol: true,
     };
     if (!vol.Nvol){
-        alert("Veuillez selectionner un numéro de vol")
+        alert("Veuillez sélectionner un numéro de vol")
         return;
     } 
     event.preventDefault();

@@ -91,7 +91,7 @@ const url = `https://flygana.onrender.com/place/${encodeURIComponent(vol.Nvol)}/
 }
 
 
-//Calcul des données supplémentaire (prix)
+//Calcul du prix
 
 function calculer(vol, client){
     if (client.classe === "première") {
@@ -135,6 +135,7 @@ function calculer(vol, client){
 
         const data = await response.json();
         console.log('Réponse du serveur :', data);
+        if (data){alert("Votre billet a été enristré. Veuillez consulter le billet ci-dessous.")}
         afficherBillet(billet);
     } catch (error) {
         console.error('Erreur :', error);
