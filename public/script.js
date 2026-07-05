@@ -18,7 +18,7 @@ const url = 'https://flygana.onrender.com/vol';
         datavols = data;
         for (let i = 0; i < data.length; i++){
         const opt = document.createElement("option");
-        opt.textContent = data[i].depart + "/" + data[i].arrivee + ", le " + data[i].date + " à " +data[i].horaire;
+        opt.textContent = data[i].depart + "/" + data[i].arrivee + ", " + new Date(data[i].horaire.toLocaleString());
         opt.value = data[i].Nvol;
     document.getElementById("vol").appendChild(opt);
     }
@@ -153,7 +153,7 @@ function afficherBillet(billet){
     document.getElementById("Bprenom").innerHTML = billet.Pclient;
     document.getElementById("Bdepart").innerHTML = billet.depart;
     document.getElementById("Barrivee").innerHTML = billet.arrivee;
-    document.getElementById("Bhoraire").innerHTML = billet.horaire;
+    document.getElementById("Bhoraire").innerHTML = new Date(billet.horaire.toLocaleString());
     document.getElementById("Btmps").innerHTML = billet.tmps + "heures";
     document.getElementById("Bprix").innerHTML = billet.prix + "€";
     document.getElementById("Bclasse").innerHTML = billet.classe;

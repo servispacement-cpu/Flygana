@@ -104,7 +104,7 @@ afficherBillet();
             //Rentabilité
         renta.textContent = "Remplissage du vol : " + (resbil.resbil1 + resbil.resbil2)/(datavol[i].places1 + datavol[i].places2)*100 + " %";
             //Recaps (date, horaire, temps)
-            recaps.textContent = "Vol le " + datavol[i].date + " à " + datavol[i].horaire + ", pendant " + datavol[i].tmps + " heures." ;
+            recaps.textContent = "Vol le "+ new Date(datavol[i].horaire.toLocaleString()) + ", pendant " + datavol[i].tmps + " heures." ;
         idstat.appendChild(tit);
         idstat.appendChild(statprix);
         idstat.appendChild(statplaces1);
@@ -144,8 +144,7 @@ async function createVol(event){
         depart: document.getElementById("Adep").value,
         arrivee: document.getElementById("Aarr").value,
         dist:  document.getElementById("dist").value,
-        date:  document.getElementById("date").value,
-        horaire:  document.getElementById("horaire").value,
+        horaire:  new Date(document.getElementById("horaire").value),
         places1:  document.getElementById("places1").value,
         places2:  document.getElementById("places2").value,
         Nvol:  document.getElementById("Nvol").value,
@@ -174,7 +173,7 @@ async function createVol(event){
 
         const data = await response.json();
         console.log('Réponse du serveur :', data);
-        alert("Votre vol, dont le muméro est " + vol.Nvol + " a bien été créé. Veillez consulter régulièrement cette page afin de surveiller les réservation")
+        alert("Votre vol, dont le numéro est " + vol.Nvol + " a bien été créé. Veuillez consulter régulièrement cette page afin de surveiller les réservations")
     } catch (error) {
         console.error('Erreur :', error);
     } 

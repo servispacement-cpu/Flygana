@@ -28,8 +28,7 @@ mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r
 const Schemab = new mongoose.Schema({
   depart: String,
   arrivee: String,
-  date: String,
-  horaire: String,
+  horaire: Date,
   Nvol: String,
   places1: Number,
   places2: Number,
@@ -45,8 +44,7 @@ const Schemab = new mongoose.Schema({
 const Schemav = new mongoose.Schema({
   depart: String,
   arrivee: String,
-  date: String,
-  horaire: String,
+  horaire: Date,
   Nvol: String,
   places1: Number,
   places2: Number,
