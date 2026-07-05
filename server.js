@@ -26,34 +26,34 @@ mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r
 // Define a schema for our data
 
 const Schemab = new mongoose.Schema({
-  depart: String,
-  arrivee: String,
-  horaire: { type: Date,
+  "depart": String,
+  "arrivee": String,
+  "horaire": { type: Date,
     index: { expires: 0 }
   },
-  Nvol: String,
-  places1: Number,
-  places2: Number,
-  dist: Number,
+  "Nvol": String,
+  "places1": Number,
+  "places2": Number,
+  "dist": Number,
 
-  Pclient: String,
-  Nclient:String,
-  prix: Number,
-  tmps: Number,
-  classe: String,
+  "Pclient": String,
+  "Nclient":String,
+  "prix": Number,
+  "tmps": Number,
+  "classe": String,
 });
 
 const Schemav = new mongoose.Schema({
-  depart: String,
-  arrivee: String,
-  horaire: { type: Date,
+  "depart": String,
+  "arrivee": String,
+  "horaire": { type: Date,
     index: { expires: 0 }
   },
-  Nvol: String,
-  places1: Number,
-  places2: Number,
-  dist: Number,
-  tmps: Number,
+  "Nvol": String,
+  "places1": Number,
+  "places2": Number,
+  "dist": Number,
+  "tmps": Number,
 });
  
 
